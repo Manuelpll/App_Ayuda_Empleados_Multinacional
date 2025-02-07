@@ -22,10 +22,10 @@ fun Telefono(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(onClick = {  }) {
+            Button(onClick = { navigateToHoras() }) {
                 Text(text = "Ir a horas")
             }
-            Button(onClick = {  }) {
+            Button(onClick = {navigateToTemperaturas() }) {
                 Text(text = "Ir a temperatura")
             }
         }

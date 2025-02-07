@@ -21,10 +21,10 @@ fun Temperaturas(navigateToHoras: () -> Unit, navigateToTelefonos: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(onClick = {  }) {
+            Button(onClick = {  navigateToHoras()}) {
                 Text(text = "Ir a horas")
             }
-            Button(onClick = {  }) {
+            Button(onClick = {  navigateToTelefonos()}) {
                 Text(text = "Ir a telefonos")
             }
         }

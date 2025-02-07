@@ -11,23 +11,23 @@ import com.example.app_ayuda_empleados_multinacional.Screens.Telefonos.Telefono
 fun NavegationWrapper() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "temperaturas") {
+    NavHost(navController = navController, startDestination = Temperaturas) {
         composable<Horas> {
             Horas(
-                navigateToTemperaturas = { navController.navigate("temperaturas") },
-                navigateToTelefonos = { navController.navigate("telefonos") }
+                navigateToTemperaturas = { navController.navigate(Temperaturas) },
+                navigateToTelefonos = { navController.navigate(Telefono) }
             )
         }
         composable<Temperaturas>{
             Temperaturas(
-                navigateToHoras = { navController.navigate("horas") },
-                navigateToTelefonos = { navController.navigate("telefonos") }
+                navigateToHoras = { navController.navigate(Horas) },
+                navigateToTelefonos = { navController.navigate(Telefono) }
             )
         }
         composable<Telefono>{
             Telefono(
-                navigateToHoras = { navController.navigate("horas") },
-                navigateToTemperaturas = { navController.navigate("temperaturas") }
+                navigateToHoras = { navController.navigate(Horas) },
+                navigateToTemperaturas = { navController.navigate(Temperaturas) }
             )
         }
     }
