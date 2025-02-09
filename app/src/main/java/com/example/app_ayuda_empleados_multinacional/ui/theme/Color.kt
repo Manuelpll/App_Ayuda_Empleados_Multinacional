@@ -1,15 +1,15 @@
 package com.example.compose
 import androidx.compose.ui.graphics.Color
 
-val primaryLight = Color(0xFF904A43)
+val primaryLight = Color(0xFF904A43) //Usar Este de principal
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFFFDAD6)
 val onPrimaryContainerLight = Color(0xFF73332D)
-val secondaryLight = Color(0xFF606219)
+val secondaryLight = Color(0xFF606219)//Usar Este de secundario para botones
 val onSecondaryLight = Color(0xFFFFFFFF)
 val secondaryContainerLight = Color(0xFFE7E790)
 val onSecondaryContainerLight = Color(0xFF484A00)
-val tertiaryLight = Color(0xFF616118)
+val tertiaryLight = Color(0xFF616118)//Usar este de terciario  para textos y demás
 val onTertiaryLight = Color(0xFFFFFFFF)
 val tertiaryContainerLight = Color(0xFFE8E78F)
 val onTertiaryContainerLight = Color(0xFF494900)

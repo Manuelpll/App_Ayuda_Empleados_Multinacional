@@ -1,4 +1,4 @@
-package com.example.app_ayuda_empleados_multinacional.Screens.Temperaturas
+package com.example.app_ayuda_empleados_multinacional.Screens.Telefonos
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -25,11 +25,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.app_ayuda_empleados_multinacional.R
 import com.example.compose.onPrimaryContainerLight
 import com.example.compose.primaryLight
@@ -37,7 +36,7 @@ import com.example.compose.primaryLight
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Temperaturas(navigateToHoras: () -> Unit, navigateToTelefonos: () -> Unit) {
+fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -91,7 +90,7 @@ fun Temperaturas(navigateToHoras: () -> Unit, navigateToTelefonos: () -> Unit) {
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(onClick = { /*Pantalla actual*/ },modifier = Modifier.weight(1f)) {
+                    IconButton(onClick = { navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(imageVector = Icons.Default.Thermostat, contentDescription = "Conversor temperaturas")
                             Text("Conversor temperaturas", style = MaterialTheme.typography.labelSmall,
@@ -105,7 +104,7 @@ fun Temperaturas(navigateToHoras: () -> Unit, navigateToTelefonos: () -> Unit) {
                                 maxLines = 2)
                         }
                     }
-                    IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
+                    IconButton(onClick = { /*Pantalla actual*/ },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda y contactos")
                             Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelSmall
@@ -117,7 +116,7 @@ fun Temperaturas(navigateToHoras: () -> Unit, navigateToTelefonos: () -> Unit) {
         }
     ) {
         Column(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -130,15 +129,10 @@ fun Temperaturas(navigateToHoras: () -> Unit, navigateToTelefonos: () -> Unit) {
                 Button(onClick = { navigateToHoras() }) {
                     Text(text = "Ir a horas")
                 }
-                Button(onClick = { navigateToTelefonos() }) {
-                    Text(text = "Ir a telefonos")
+                Button(onClick = { navigateToTemperaturas() }) {
+                    Text(text = "Ir a temperatura")
                 }
             }
         }
     }
-}
-@Preview
-@Composable
-fun TemperaturasPreview(){
-
 }

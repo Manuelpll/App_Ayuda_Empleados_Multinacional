@@ -9,4 +9,4 @@ object Temperaturas
 object Horas
 
 @Serializable
-object Telefono
+object Telefonos
