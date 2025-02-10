@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Schedule
@@ -28,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.app_ayuda_empleados_multinacional.R
@@ -44,19 +44,12 @@ fun Horas(navigateToTemperaturas: () -> Unit, navigateToTelefonos: () -> Unit) {
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = "Splatnot",
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier.fillMaxWidth() .padding(start = 40.dp)
-                    )
                 }, navigationIcon = {
-                    IconButton(onClick = { }) {
                         Icon(
                             painter = painterResource(id = R.drawable.splatnot),
                             contentDescription = "Logo_Empresa",
-                            modifier = Modifier.padding(0.dp),
+                            modifier = Modifier.size(90.dp),
                         )
-                    }
                 },
                 actions = {
                     IconButton(onClick = { }) {
@@ -96,21 +89,21 @@ fun Horas(navigateToTemperaturas: () -> Unit, navigateToTelefonos: () -> Unit) {
                 IconButton(onClick = { navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(imageVector = Icons.Default.Thermostat, contentDescription = "Conversor temperaturas")
-                        Text("Conversor temperaturas", style = MaterialTheme.typography.labelSmall,
+                        Text("Temperaturas", style = MaterialTheme.typography.labelSmall,
                             maxLines = 2)
                     }
                 }
                 IconButton(onClick = { /* Es la pantalla actual */ },modifier = Modifier.weight(1f)) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades")
-                        Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelSmall,
+                        Text("Horas ", style = MaterialTheme.typography.labelSmall,
                             maxLines = 2)
                     }
                 }
                 IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda y contactos")
-                        Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelSmall
+                        Text("Teléfonos", style = MaterialTheme.typography.labelSmall
                             )
                           }
                     }

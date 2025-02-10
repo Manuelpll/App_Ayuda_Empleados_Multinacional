@@ -72,5 +72,5 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     //Mas Iconos
-    implementation("androidx.compose.material:material-icons-extended:1.7.7")
+    implementation(libs.androidx.material.icons.extended)
 }

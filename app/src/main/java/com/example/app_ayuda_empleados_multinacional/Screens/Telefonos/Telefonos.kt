@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Schedule
@@ -41,19 +42,12 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit) {
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = "Splatnot",
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier.fillMaxWidth() .padding(start = 40.dp)
-                    )
                 }, navigationIcon = {
-                    IconButton(onClick = { }) {
                         Icon(
                             painter = painterResource(id = R.drawable.splatnot),
                             contentDescription = "Logo_Empresa",
-                            modifier = Modifier.padding(0.dp),
+                            modifier = Modifier.size(90.dp),
                         )
-                    }
                 },
                 actions = {
                     IconButton(onClick = { }) {
