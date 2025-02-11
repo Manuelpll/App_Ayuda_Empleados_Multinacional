@@ -1,6 +1,7 @@
 package com.example.app_ayuda_empleados_multinacional.Screens.Telefonos
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,7 +44,7 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit) {
             TopAppBar(
                 title = {
                 }, navigationIcon = {
-                        Icon(
+                        Image(
                             painter = painterResource(id = R.drawable.splatnot),
                             contentDescription = "Logo_Empresa",
                             modifier = Modifier.size(90.dp),
@@ -96,13 +97,6 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit) {
                             Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades")
                             Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelSmall,
                                 maxLines = 2)
-                        }
-                    }
-                    IconButton(onClick = { /*Pantalla actual*/ },modifier = Modifier.weight(1f)) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda y contactos")
-                            Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelSmall
-                            )
                         }
                     }
                 }
