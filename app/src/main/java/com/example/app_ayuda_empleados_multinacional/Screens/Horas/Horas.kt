@@ -44,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -135,7 +136,7 @@ fun Horas(navigateToTemperaturas: () -> Unit,
                                 contentDescription = "Teléfonos de ayuda y contactos"
                             )
                             Text(
-                                "Teléfonos", style = MaterialTheme.typography.labelSmall
+                                "Teléfonos de Ayuda", style = MaterialTheme.typography.labelSmall
                             )
                         }
                     }
@@ -150,7 +151,7 @@ fun Horas(navigateToTemperaturas: () -> Unit,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(text = "Horas en distintas ciudades")
+            Text(text = "Horas en distintas ciudades",fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.padding(top = 10.dp))
             LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 items(paisList){ pais->
@@ -201,7 +202,7 @@ fun Horas(navigateToTemperaturas: () -> Unit,
                 }
             }
             paisSeleccionado?.let { pais ->
-                Row(modifier = Modifier.fillMaxSize()) {
+                Row(modifier = Modifier.size(700.dp)) {
                     Box(modifier = Modifier.size(width = 70.dp, height = 30.dp)) {
                         Column(modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally) {
@@ -217,7 +218,7 @@ fun Horas(navigateToTemperaturas: () -> Unit,
                             )
                         }
                     }
-                    Text("${hora} : ${minutos}")
+                    Text("${paisSeleccionado!!.hora.invoke()} : $minutos")
                 }
             }
         }

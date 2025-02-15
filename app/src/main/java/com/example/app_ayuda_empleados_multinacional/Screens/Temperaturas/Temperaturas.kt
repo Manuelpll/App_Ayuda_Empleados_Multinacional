@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_ayuda_empleados_multinacional.R
@@ -105,7 +106,7 @@ fun Temperaturas(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text("Conversor de temperatura" , fontSize = 30.sp, modifier = Modifier.padding(bottom = 15.dp))
+            Text("Conversor de temperatura" , fontSize = 30.sp, modifier = Modifier.padding(bottom = 15.dp),fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.padding(bottom = 15.dp))
 
             Text(
