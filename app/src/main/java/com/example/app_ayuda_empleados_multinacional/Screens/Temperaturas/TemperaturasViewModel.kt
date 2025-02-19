@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class TemperaturasViewModel : ViewModel() {
+    //Inicializo las variables que se van a guardar
     private val _temperature = MutableStateFlow(-30f)
     val temperature = _temperature.asStateFlow()
 
@@ -12,7 +13,7 @@ class TemperaturasViewModel : ViewModel() {
 
     private val _guardarTemp = MutableStateFlow<List<Float>>(emptyList())
     val guardarTemp = _guardarTemp.asStateFlow()
-
+//Inicializo las funciones que se van a usar en la pantalla
     fun updateTemperature(value: Float) {
         _temperature.value = value
     }

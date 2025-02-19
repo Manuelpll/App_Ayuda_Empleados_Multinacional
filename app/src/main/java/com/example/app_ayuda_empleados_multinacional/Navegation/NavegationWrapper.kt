@@ -12,7 +12,7 @@ import com.example.app_ayuda_empleados_multinacional.Screens.Telefonos.Telefonos
 fun NavegationWrapper() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Telefonos) {
+    NavHost(navController = navController, startDestination = Temperaturas) {
         composable<Horas> {
             Horas(
                 navigateToTemperaturas = { navController.navigate(Temperaturas) },

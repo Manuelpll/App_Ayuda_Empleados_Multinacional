@@ -9,7 +9,7 @@ import com.example.app_ayuda_empleados_multinacional.data.PersonaDeContacto
 
 class TelefonosViewModel : ViewModel() {
 
-    // Lista de ciudades y servicios disponibles
+    //Inicializo las variables que se van a guardar
     val ciudades = listOf(
         "Madrid", "París", "Londres", "Porto Alegre", "Acapulco",
         "Vancouver", "Houston", "Casablanca", "Osaka", "Melbourne", "Ankara", "Dubai"
@@ -20,7 +20,7 @@ class TelefonosViewModel : ViewModel() {
         "Ayuntamiento", "Servicio de Taxi", "Oficina"
     )
 
-    // Lista completa de contactos
+
     private val contactos = listOf(
         // Madrid
         Contacto("Madrid", "España", "Emergencias", "112"),
@@ -143,21 +143,18 @@ class TelefonosViewModel : ViewModel() {
         )
     )
 
-    // Estados seleccionados por el usuario
     var ciudadSeleccionada by mutableStateOf(ciudades.first())
     var servicioSeleccionado by mutableStateOf(servicios.first())
 
-    // Método para cambiar la ciudad seleccionada
+    //Inicializo las funciones que se van a usar en la pantalla
     fun cambiarCiudad(nuevaCiudad: String) {
         ciudadSeleccionada = nuevaCiudad
     }
 
-    // Método para cambiar el servicio seleccionado
     fun cambiarServicio(nuevoServicio: String) {
         servicioSeleccionado = nuevoServicio
     }
 
-    // Obtener el contacto actual en base a la ciudad y el servicio seleccionados
     val contactoActual: Contacto?
         get() = contactos.find { it.ciudad == ciudadSeleccionada && it.servicio == servicioSeleccionado }
 }

@@ -33,6 +33,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -53,10 +54,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.app_ayuda_empleados_multinacional.R
+import com.example.compose.onPrimaryContainerDark
 import com.example.compose.onPrimaryContainerLight
+import com.example.compose.primaryDark
 import com.example.compose.primaryLight
+import com.example.compose.tertiaryDark
+import com.example.ui.theme.bodyBoldSpex
+import com.example.ui.theme.bodyMonse
+import com.example.ui.theme.bodyMonseBold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -90,8 +98,7 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = primaryLight,
-                    titleContentColor = onPrimaryContainerLight
+                    containerColor = onPrimaryContainerDark
 
 
                 )
@@ -101,7 +108,7 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
             BottomAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 tonalElevation = 8.dp,
-                containerColor = primaryLight
+                containerColor = tertiaryDark
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -111,14 +118,14 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                     IconButton(onClick = { navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(imageVector = Icons.Default.Thermostat, contentDescription = "Conversor temperaturas")
-                            Text("Conversor temperaturas", style = MaterialTheme.typography.labelSmall,
+                            Text("Conversor temperaturas", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
                         }
                     }
                     IconButton(onClick = {navigateToHoras() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades")
-                            Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelSmall,
+                            Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
                         }
                     }
@@ -136,9 +143,9 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
             Text(
                 text = "Teléfonos de ayuda y contactos",
                 style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = 16.dp),
+                fontFamily = bodyBoldSpex
             )
 
             Column(
@@ -165,35 +172,47 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                         ) { viewModel.servicioSeleccionado = it }
                     }
                 }
-            // Espaciado entre los dropdowns y el mapa
-            Spacer(modifier = Modifier.height(16.dp))
 
-
+                Spacer(modifier = Modifier.height(16.dp))
                 Image(
                     painter = painterResource(id = obtenerMapa(viewModel.ciudadSeleccionada)),
                     contentDescription = "Mapa de ${viewModel.ciudadSeleccionada}",
-                    modifier = Modifier.size(200.dp).clip(RoundedCornerShape(8.dp)),
+                    modifier = Modifier
+                        .size(300.dp)
+                        .clip(RoundedCornerShape(8.dp)),
                     contentScale = ContentScale.Crop
                 )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-// Mostrar información del contacto seleccionado
-            viewModel.contactoActual?.let { contacto ->
-                Text("${contacto.ciudad}, ${contacto.pais}", style = MaterialTheme.typography.titleLarge)
-                SelectionContainer {
-                    Text("Teléfono: ${contacto.telefono}", style = MaterialTheme.typography.headlineSmall)
-                }
+                viewModel.contactoActual?.let { contacto ->
+                    Text(
+                        "${contacto.ciudad}, ${contacto.pais}",
+                        style = MaterialTheme.typography.displayMedium,
+                        fontFamily = bodyMonse
+                    )
 
-                // Mostrar información de la persona de contacto si está disponible
-                contacto.persona?.let { persona ->
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text("Contacto: ${persona.nombre}")
-                    SelectionContainer { Text("Tel: ${persona.telefono}") }
-                    SelectionContainer { Text("Email: ${persona.email}") }
+                    SelectionContainer {
+                        Text(
+                            "Teléfono: ${contacto.telefono}",
+                            style = MaterialTheme.typography.headlineMedium,
+                            fontFamily = bodyMonse
+                        )
+                    }
+
+                    contacto.persona?.let { persona ->
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("Contacto: ${persona.nombre}",
+                            fontFamily = bodyMonse,
+                            fontSize =  20.sp)
+                        SelectionContainer { Text("Tel: ${persona.telefono}",
+                            fontFamily = bodyMonse,
+                            fontSize =  20.sp) }
+                        SelectionContainer { Text("Email: ${persona.email}",
+                            fontFamily = bodyMonseBold) }
+                    }
                 }
             }
-        }
 
         }
     }

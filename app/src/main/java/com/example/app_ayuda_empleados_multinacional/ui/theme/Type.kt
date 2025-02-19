@@ -2,11 +2,8 @@ package com.example.ui.theme
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
-
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.googlefonts.Font
 import com.example.app_ayuda_empleados_multinacional.R
@@ -24,6 +21,11 @@ val bodyFontFamily = FontFamily(
         fontProvider = provider,
     )
 )
+
+val bodyMonse = FontFamily(Font(R.font.montserrat_regular))
+val bodyMonseBold = FontFamily(Font(R.font.montserrat_bold))
+val bodySpex = FontFamily(Font(R.font.spectral_regular))
+val bodyBoldSpex = FontFamily(Font(R.font.spectral_bold))
 
 val displayFontFamily = FontFamily(
     Font(

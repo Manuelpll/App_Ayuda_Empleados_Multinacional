@@ -20,8 +20,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_ayuda_empleados_multinacional.R
+import com.example.compose.onPrimaryContainerDark
 import com.example.compose.onPrimaryContainerLight
+import com.example.compose.primaryDark
 import com.example.compose.primaryLight
+import com.example.compose.secondaryDark
+import com.example.compose.tertiaryDark
+import com.example.ui.theme.bodyBoldSpex
+import com.example.ui.theme.bodyMonse
+import com.example.ui.theme.bodyMonseBold
+import com.example.ui.theme.bodySpex
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,15 +38,15 @@ fun Temperaturas(
     navigateToTelefonos: () -> Unit,
     viewModel: TemperaturasViewModel = viewModel()
 ) {
+    //Inicializo variables
     val temperature by viewModel.temperature.collectAsState()
     val isFahrenheit by viewModel.isFahrenheit.collectAsState()
     val guardarTemp by viewModel.guardarTemp.collectAsState()
-
+// Creo el Scafold
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                }, navigationIcon = {
+                title = {}, navigationIcon = {
                     Image(
                         painter = painterResource(id = R.drawable.splatnot),
                         contentDescription = "Logo_Empresa",
@@ -62,8 +70,7 @@ fun Temperaturas(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = primaryLight,
-                    titleContentColor = onPrimaryContainerLight
+                    containerColor = onPrimaryContainerDark
 
 
                 )
@@ -73,7 +80,7 @@ fun Temperaturas(
             BottomAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 tonalElevation = 8.dp,
-                containerColor = primaryLight
+                containerColor = tertiaryDark
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -83,15 +90,14 @@ fun Temperaturas(
                     IconButton(onClick = {navigateToHoras() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades")
-                            Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelSmall,
+                            Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
                         }
                     }
                     IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda y contactos")
-                            Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelSmall
-                            )
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda")
+                            Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelMedium)
                         }
                     }
                 }
@@ -106,13 +112,14 @@ fun Temperaturas(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text("Conversor de temperatura" , fontSize = 30.sp, modifier = Modifier.padding(bottom = 15.dp),fontWeight = FontWeight.Bold)
+            Text("Conversor de temperatura" , fontSize = 30.sp, modifier = Modifier.padding(bottom = 15.dp), fontFamily = bodyBoldSpex)
             Spacer(modifier = Modifier.padding(bottom = 15.dp))
 
             Text(
                 text = "Temperatura actual: ${if (isFahrenheit) viewModel.celsiusToFahrenheit(temperature.toInt()) else temperature.toInt()} ${if (isFahrenheit) "°F" else "°C"}",
                 fontSize = 20.sp,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = 16.dp),
+                fontFamily = bodyMonse
             )
 
             Spacer(modifier = Modifier.padding(bottom = 15.dp))
@@ -127,7 +134,7 @@ fun Temperaturas(
                 ),
                 valueRange = -30f..55f,
                 steps = 85,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = 16.dp).height(20.dp).width(280.dp)
             )
 
             Row(
@@ -135,7 +142,7 @@ fun Temperaturas(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Pasar a Fahrenheit", fontSize = 20.sp)
+                Text(text = "Fahrenheit", fontSize = 20.sp,fontFamily = bodyMonse)
                 Checkbox(
                     checked = isFahrenheit,
                     onCheckedChange = { viewModel.toggleFahrenheit() }
@@ -149,8 +156,10 @@ fun Temperaturas(
                     modifier = Modifier.size(90.dp)
                 )
                 Row {
-                    Text("${temperature.toInt()} °C", modifier = Modifier.padding(end = 25.dp))
-                    Text("${viewModel.celsiusToFahrenheit(temperature.toInt())}°F", modifier = Modifier.padding(start = 10.dp))
+                    Text("${temperature.toInt()} °C", modifier = Modifier.padding(end = 30.dp),fontSize = 25.sp,
+                        fontFamily = bodyMonse)
+                    Text("${viewModel.celsiusToFahrenheit(temperature.toInt())}°F", modifier = Modifier.padding(start = 25.dp),fontSize = 25.sp,
+                        fontFamily = bodyMonse)
                 }
             }
 
@@ -174,9 +183,10 @@ fun Temperaturas(
                         }
                         Image(imageVector = iconTemp, contentDescription = "Icono temperatura")
                         Text(
-                            text = "Temperatura guardada: ${temp.toInt()}°C - ${viewModel.celsiusToFahrenheit(temp.toInt())}°F",
-                            fontSize = 14.sp,
-                            modifier = Modifier.padding(start = 8.dp)
+                            text = "Temperatura guardada: ${temp.toInt()}°C  ${viewModel.celsiusToFahrenheit(temp.toInt())}°F",
+                            fontSize = 18.sp,
+                            modifier = Modifier.padding(start = 8.dp),
+                            fontFamily = bodyMonse
                         )
                     }
                 }

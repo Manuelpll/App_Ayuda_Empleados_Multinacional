@@ -3,7 +3,6 @@ package com.example.app_ayuda_empleados_multinacional.Screens.Horas
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,11 +23,12 @@ import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -37,39 +38,45 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.app_ayuda_empleados_multinacional.R
-import com.example.app_ayuda_empleados_multinacional.data.Pais
+import com.example.compose.onPrimaryContainerDark
 import com.example.compose.onPrimaryContainerLight
+import com.example.compose.primaryDark
 import com.example.compose.primaryLight
+import com.example.compose.tertiaryDark
+import com.example.ui.theme.bodyBoldSpex
+import com.example.ui.theme.bodyMonse
+import com.example.ui.theme.bodyMonseBold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Horas(navigateToTemperaturas: () -> Unit,
-          navigateToTelefonos: () -> Unit,
-          viewModel: HorasViewModel = viewModel()
+fun Horas(
+    navigateToTemperaturas: () -> Unit,
+    navigateToTelefonos: () -> Unit,
+    viewModel: HorasViewModel = viewModel()
 ) {
-    //Inicializo las variables que voy a usar
-    val paisList  by viewModel.paises.collectAsState()
-    val hora  by  viewModel.hora.collectAsState()
-    val minutos  by viewModel.minutos.collectAsState()
+    //Inicializo las variables
+    val paisList by viewModel.paises.collectAsState()
+    val hora by viewModel.hora.collectAsState()
+    val minutos by viewModel.minutos.collectAsState()
     val paisSeleccionado by viewModel.paisSeleccionado.collectAsState()
-    //Creo un Scaffold para agregar el topBar y el bottomBar
+// Creo el Scafold
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {}, navigationIcon = {
+                title = {
+                }, navigationIcon = {
                     Image(
                         painter = painterResource(id = R.drawable.splatnot),
                         contentDescription = "Logo_Empresa",
@@ -93,8 +100,7 @@ fun Horas(navigateToTemperaturas: () -> Unit,
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = primaryLight,
-                    titleContentColor = onPrimaryContainerLight
+                    containerColor = onPrimaryContainerDark
 
 
                 )
@@ -104,39 +110,24 @@ fun Horas(navigateToTemperaturas: () -> Unit,
             BottomAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 tonalElevation = 8.dp,
-                containerColor = primaryLight
+                containerColor = tertiaryDark
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(
-                        onClick = { navigateToTemperaturas() },
-                        modifier = Modifier.weight(1f)
-                    ) {
+                    IconButton(onClick = {navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(
-                                imageVector = Icons.Default.Thermostat,
-                                contentDescription = "Conversor temperaturas"
-                            )
-                            Text(
-                                "Temperaturas", style = MaterialTheme.typography.labelSmall,
-                                maxLines = 2
-                            )
+                            Icon(Icons.Default.Thermostat, contentDescription = "Horas en distintas ciudades")
+                            Text("Conversor Temperaturas", style = MaterialTheme.typography.labelMedium,
+                                maxLines = 2)
                         }
                     }
-                    IconButton(
-                        onClick = { navigateToTelefonos() },
-                        modifier = Modifier.weight(1f)
-                    ) {
+                    IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(
-                                Icons.Default.Phone,
-                                contentDescription = "Teléfonos de ayuda y contactos"
-                            )
-                            Text(
-                                "Teléfonos de Ayuda", style = MaterialTheme.typography.labelSmall
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda ")
+                            Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelMedium
                             )
                         }
                     }
@@ -145,83 +136,124 @@ fun Horas(navigateToTemperaturas: () -> Unit,
         }
     ) { paddingValues ->
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(paddingValues)
                 .padding(top = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(text = "Horas en distintas ciudades",fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier.padding(top = 10.dp))
-            LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                items(paisList){ pais->
-                    Button(onClick = {viewModel.seleccionarPais(pais)}, modifier = Modifier.width(130.dp).height(50.dp) .clip(MaterialTheme.shapes.extraSmall), colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.White
-                    )){
+            Text(
+                text = "Horas en distintas ciudades",
+                fontWeight = FontWeight.Bold,
+                fontSize = 22.sp
+                , fontFamily = bodyBoldSpex
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                items(paisList) { pais ->
+                    Button(
+                        onClick = { viewModel.seleccionarPais(pais) },
+                        modifier = Modifier.padding(horizontal = 4.dp)
+                    ) {
                         Text(pais.ciudad)
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(10.dp))
+//Añado los textField donde se van poniendo la hora y los minutos
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextField(
                     value = hora.toString(),
-                    onValueChange = { nuevoValor ->
-                        nuevoValor.toIntOrNull()?.let { viewModel.updateHora(it) }
-                    },
-                    label = { Text("Horas") },
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(end = 8.dp),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-                    )
+                    onValueChange = { nuevoValor -> nuevoValor.toIntOrNull()?.let { viewModel.updateHora(it) } },
+                    label = { Text("Horas", fontFamily = bodyMonse) },
+                    modifier = Modifier.width(100.dp),
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
                 )
-
+                Spacer(modifier = Modifier.width(8.dp))
                 TextField(
                     value = minutos.toString(),
-                    onValueChange = { nuevoValor ->
-                        nuevoValor.toIntOrNull()?.let { viewModel.updateMinutos(it) }
-                    },
-                    label = { Text("Minutos") },
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 8.dp),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-                    )
+                    onValueChange = { nuevoValor -> nuevoValor.toIntOrNull()?.let { viewModel.updateMinutos(it) } },
+                    label = { Text("Minutos", fontFamily = bodyMonse) },
+                    modifier = Modifier.width(100.dp),
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
                 )
-                Spacer(modifier = Modifier.padding(horizontal = 10.dp))
-                Button(onClick = {}) {
-                    Text("Mostrar Hora")
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Muestro la ciudad y la hora seleccionada
+            paisSeleccionado?.let { pais ->
+                Row (verticalAlignment = Alignment.CenterVertically) {
+                    Image(
+                        painter = painterResource(id = pais.image),
+                        contentDescription = "Imagen de ${pais.ciudad}",
+                        modifier = Modifier.size(250.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center) {
+                        Text(
+                            text = "${pais.ciudad}, ${pais.pais}",
+                            fontSize = 20.sp,
+                            fontFamily = bodyMonseBold
+                        )
+                        Text(
+                            text = "${
+                                viewModel.calcularHoraLocal(
+                                    hora,
+                                    pais.diferenciaHoras
+                                )
+                            }:$minutos",
+                            fontSize = 28.sp,
+                            fontFamily = bodyMonseBold
+                        )
+                    }
                 }
             }
-            paisSeleccionado?.let { pais ->
-                Row(modifier = Modifier.size(700.dp)) {
-                    Box(modifier = Modifier.size(width = 70.dp, height = 30.dp)) {
-                        Column(modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally) {
-                            Image(
-                                painter = painterResource(id = pais.image),
-                                contentDescription = "Imagen de ${pais.ciudad}",
-                                modifier = Modifier.size(500.dp)
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            Text(
-                                text = " ${pais.ciudad}",
-                                style = MaterialTheme.typography.bodyLarge
-                            )
-                        }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Lista de  las otras ciudades
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(paisList.filter { it != paisSeleccionado }) { pais ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(id = pais.image),
+                            contentDescription = "Mapa de ${pais.ciudad}",
+                            modifier = Modifier.size(210.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                        Text(
+                            text = pais.ciudad,
+                            fontSize = 18.sp,
+                            fontFamily = bodyMonseBold
+                        )
+                        Text(
+                            text = "${viewModel.calcularHoraLocal(hora, pais.diferenciaHoras)}:$minutos",
+                            fontSize = 18.sp,
+                            fontFamily = bodyMonseBold
+                        )
                     }
-                    Text("${paisSeleccionado!!.hora.invoke()} : $minutos")
                 }
             }
         }
     }
-
 }
+
