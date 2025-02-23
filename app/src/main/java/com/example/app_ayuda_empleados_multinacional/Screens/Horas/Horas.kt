@@ -18,17 +18,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -40,7 +38,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -50,9 +47,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.app_ayuda_empleados_multinacional.R
 import com.example.compose.onPrimaryContainerDark
-import com.example.compose.onPrimaryContainerLight
-import com.example.compose.primaryDark
-import com.example.compose.primaryLight
 import com.example.compose.tertiaryDark
 import com.example.ui.theme.bodyBoldSpex
 import com.example.ui.theme.bodyMonse
@@ -80,7 +74,7 @@ fun Horas(
                     Image(
                         painter = painterResource(id = R.drawable.splatnot),
                         contentDescription = "Logo_Empresa",
-                        modifier = Modifier.size(90.dp),
+                        modifier = Modifier.size(130.dp).padding(start= 20.dp),
                     )
                 },
                 actions = {
@@ -88,14 +82,14 @@ fun Horas(
                         Icon(
                             imageVector = Icons.Rounded.Settings,
                             contentDescription = "Editar",
-                            modifier = Modifier.padding(0.dp)
+                            modifier = Modifier.padding(0.dp) .size(35.dp)
                         )
                     }
                     IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Rounded.AccountCircle,
                             contentDescription = "Login",
-                            modifier = Modifier.padding(0.dp),
+                            modifier = Modifier.padding(0.dp).size(35.dp)
                         )
                     }
                 },
@@ -110,7 +104,7 @@ fun Horas(
             BottomAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 tonalElevation = 8.dp,
-                containerColor = tertiaryDark
+                containerColor =  onPrimaryContainerDark
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -119,15 +113,21 @@ fun Horas(
                 ) {
                     IconButton(onClick = {navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Thermostat, contentDescription = "Horas en distintas ciudades")
-                            Text("Conversor Temperaturas", style = MaterialTheme.typography.labelMedium,
+                            Icon(Icons.Default.Thermostat, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
+                            Text("Temperaturas", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
+                        }
+                    }
+                    IconButton(onClick = {  },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Schedule, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
+                            Text("Horas", style = MaterialTheme.typography.labelMedium)
                         }
                     }
                     IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda ")
-                            Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelMedium
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
+                            Text("Teléfonos", style = MaterialTheme.typography.labelMedium
                             )
                         }
                     }
@@ -174,7 +174,13 @@ fun Horas(
             ) {
                 TextField(
                     value = hora.toString(),
-                    onValueChange = { nuevoValor -> nuevoValor.toIntOrNull()?.let { viewModel.updateHora(it) } },
+                    onValueChange = { nuevoValor ->
+                        nuevoValor.toIntOrNull()?.let { numero ->
+                            if (numero in 0..23) {
+                                viewModel.updateHora(numero)
+                            }
+                        }
+                    },
                     label = { Text("Horas", fontFamily = bodyMonse) },
                     modifier = Modifier.width(100.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
@@ -182,7 +188,13 @@ fun Horas(
                 Spacer(modifier = Modifier.width(8.dp))
                 TextField(
                     value = minutos.toString(),
-                    onValueChange = { nuevoValor -> nuevoValor.toIntOrNull()?.let { viewModel.updateMinutos(it) } },
+                    onValueChange =  { nuevoValor ->
+                        nuevoValor.toIntOrNull()?.let { numero ->
+                            if (numero in 0..59) {
+                                viewModel.updateMinutos(numero)
+                            }
+                        }
+                    },
                     label = { Text("Minutos", fontFamily = bodyMonse) },
                     modifier = Modifier.width(100.dp),
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
@@ -205,7 +217,8 @@ fun Horas(
                         Text(
                             text = "${pais.ciudad}, ${pais.pais}",
                             fontSize = 20.sp,
-                            fontFamily = bodyMonseBold
+                            fontFamily = bodyMonseBold,
+                            modifier = Modifier.padding(start = 20.dp)
                         )
                         Text(
                             text = "${
@@ -247,7 +260,7 @@ fun Horas(
                         )
                         Text(
                             text = "${viewModel.calcularHoraLocal(hora, pais.diferenciaHoras)}:$minutos",
-                            fontSize = 18.sp,
+                            fontSize = 17.sp,
                             fontFamily = bodyMonseBold
                         )
                     }

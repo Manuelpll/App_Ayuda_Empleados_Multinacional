@@ -78,7 +78,7 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                         Image(
                             painter = painterResource(id = R.drawable.splatnot),
                             contentDescription = "Logo_Empresa",
-                            modifier = Modifier.size(90.dp),
+                            modifier = Modifier.size(130.dp) .padding(start= 20.dp),
                         )
                 },
                 actions = {
@@ -86,14 +86,14 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                         Icon(
                             imageVector = Icons.Rounded.Settings,
                             contentDescription = "Editar",
-                            modifier = Modifier.padding(0.dp)
+                            modifier = Modifier.padding(0.dp).size(15.dp)
                         )
                     }
                     IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Rounded.AccountCircle,
                             contentDescription = "Login",
-                            modifier = Modifier.padding(0.dp),
+                            modifier = Modifier.padding(0.dp).size(15.dp)
                         )
                     }
                 },
@@ -108,7 +108,7 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
             BottomAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 tonalElevation = 8.dp,
-                containerColor = tertiaryDark
+                containerColor =  onPrimaryContainerDark
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -117,15 +117,21 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                 ) {
                     IconButton(onClick = { navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(imageVector = Icons.Default.Thermostat, contentDescription = "Conversor temperaturas")
-                            Text("Conversor temperaturas", style = MaterialTheme.typography.labelMedium,
+                            Icon(imageVector = Icons.Default.Thermostat, contentDescription = "Conversor temperaturas", modifier = Modifier.size(25.dp))
+                            Text("Temperaturas", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
+                        }
+                    }
+                    IconButton(onClick = {  },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
+                            Text("Telefonos", style = MaterialTheme.typography.labelMedium)
                         }
                     }
                     IconButton(onClick = {navigateToHoras() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades")
-                            Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelMedium,
+                            Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
+                            Text("Horas", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
                         }
                     }
@@ -188,13 +194,14 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                 viewModel.contactoActual?.let { contacto ->
                     Text(
                         "${contacto.ciudad}, ${contacto.pais}",
-                        style = MaterialTheme.typography.displayMedium,
-                        fontFamily = bodyMonse
+                        style = MaterialTheme.typography.displaySmall,
+                        fontFamily = bodyMonse,
+                        fontSize =  18.sp
                     )
 
                     SelectionContainer {
                         Text(
-                            "Teléfono: ${contacto.telefono}",
+                            "${contacto.telefono}",
                             style = MaterialTheme.typography.headlineMedium,
                             fontFamily = bodyMonse
                         )
@@ -204,7 +211,7 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("Contacto: ${persona.nombre}",
                             fontFamily = bodyMonse,
-                            fontSize =  20.sp)
+                            fontSize =  18.sp)
                         SelectionContainer { Text("Tel: ${persona.telefono}",
                             fontFamily = bodyMonse,
                             fontSize =  20.sp) }

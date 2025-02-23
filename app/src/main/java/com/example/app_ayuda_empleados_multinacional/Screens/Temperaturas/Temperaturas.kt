@@ -1,5 +1,6 @@
 package com.example.app_ayuda_empleados_multinacional.Screens.Temperaturas
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -50,7 +51,7 @@ fun Temperaturas(
                     Image(
                         painter = painterResource(id = R.drawable.splatnot),
                         contentDescription = "Logo_Empresa",
-                        modifier = Modifier.size(90.dp),
+                        modifier = Modifier.size(130.dp).padding(start= 20.dp),
                     )
                 },
                 actions = {
@@ -58,14 +59,14 @@ fun Temperaturas(
                         Icon(
                             imageVector = Icons.Rounded.Settings,
                             contentDescription = "Editar",
-                            modifier = Modifier.padding(0.dp)
+                            modifier = Modifier.padding(0.dp).size(35.dp)
                         )
                     }
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { Log.d("Prueba","Se ha pulsado el boton")}) {
                         Icon(
                             imageVector = Icons.Rounded.AccountCircle,
                             contentDescription = "Login",
-                            modifier = Modifier.padding(0.dp),
+                            modifier = Modifier.padding(0.dp).size(35.dp)
                         )
                     }
                 },
@@ -80,7 +81,7 @@ fun Temperaturas(
             BottomAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 tonalElevation = 8.dp,
-                containerColor = tertiaryDark
+                containerColor =  onPrimaryContainerDark
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -89,15 +90,21 @@ fun Temperaturas(
                 ) {
                     IconButton(onClick = {navigateToHoras() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades")
-                            Text("Horas en distintas ciudades", style = MaterialTheme.typography.labelMedium,
+                            Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
+                            Text("Horas", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
                         }
                     }
                     IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda")
-                            Text("Teléfonos de ayuda", style = MaterialTheme.typography.labelMedium)
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
+                            Text("Teléfonos", style = MaterialTheme.typography.labelMedium)
+                        }
+                    }
+                    IconButton(onClick = {  },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Thermostat, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
+                            Text("Temperaturas", style = MaterialTheme.typography.labelMedium)
                         }
                     }
                 }
@@ -156,7 +163,7 @@ fun Temperaturas(
                     modifier = Modifier.size(90.dp)
                 )
                 Row {
-                    Text("${temperature.toInt()} °C", modifier = Modifier.padding(end = 30.dp),fontSize = 25.sp,
+                    Text("${temperature.toInt()} °C", modifier = Modifier.padding(end = 70.dp),fontSize = 25.sp,
                         fontFamily = bodyMonse)
                     Text("${viewModel.celsiusToFahrenheit(temperature.toInt())}°F", modifier = Modifier.padding(start = 25.dp),fontSize = 25.sp,
                         fontFamily = bodyMonse)
@@ -183,7 +190,7 @@ fun Temperaturas(
                         }
                         Image(imageVector = iconTemp, contentDescription = "Icono temperatura")
                         Text(
-                            text = "Temperatura guardada: ${temp.toInt()}°C  ${viewModel.celsiusToFahrenheit(temp.toInt())}°F",
+                            text = "${temp.toInt()}°C  ${viewModel.celsiusToFahrenheit(temp.toInt())}°F",
                             fontSize = 18.sp,
                             modifier = Modifier.padding(start = 8.dp),
                             fontFamily = bodyMonse
