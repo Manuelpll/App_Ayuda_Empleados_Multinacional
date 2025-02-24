@@ -44,8 +44,8 @@ class HorasViewModel : ViewModel() {
             Pais("Casablanca", "Marruecos", R.drawable.casablanca, 0),
             Pais("Osaka", "Japón", R.drawable.osaka, +8),
             Pais("Melbourne", "Australia", R.drawable.melbourne, +10),
-            Pais("Ankara", "Turquía", R.drawable.ankara, +2),
-            Pais("Dubai", "Emiratos Árabes Unidos", R.drawable.dubai, +3)
+            Pais("Dubai", "Emiratos Árabes Unidos", R.drawable.dubai, +3),
+            Pais("Berlin", "Alemania", R.drawable.mapaalemania, 0),
         )
         _paises.value = nuevaLista
     }

@@ -12,7 +12,7 @@ class TelefonosViewModel : ViewModel() {
     //Inicializo las variables que se van a guardar
     val ciudades = listOf(
         "Madrid", "París", "Londres", "Porto Alegre", "Acapulco",
-        "Vancouver", "Houston", "Casablanca", "Osaka", "Melbourne", "Ankara", "Dubai"
+        "Vancouver", "Houston", "Casablanca", "Osaka", "Melbourne", "Berlin", "Dubai"
     )
 
     val servicios = listOf(
@@ -121,16 +121,6 @@ class TelefonosViewModel : ViewModel() {
         Contacto("Melbourne", "Australia", "Oficina", "+61 3 9974 9600",
             PersonaDeContacto("Emily Johnson", "+61 3 9974 9677", "ejohnson@splatnot.com")
         ),
-        // Ankara
-        Contacto("Ankara", "Turquía", "Emergencias", "112"),
-        Contacto("Ankara", "Turquía", "Policía", "155"),
-        Contacto("Ankara", "Turquía", "Bomberos", "110"),
-        Contacto("Ankara", "Turquía", "Oficina de Información y Turismo", "+90 312 310 13 55"),
-        Contacto("Ankara", "Turquía", "Ayuntamiento", "+90 312 507 10 00"),
-        Contacto("Ankara", "Turquía", "Servicio de Taxi", "+90 312 444 75 47"),
-        Contacto("Ankara", "Turquía", "Oficina", "+90 312 822 70 00",
-            PersonaDeContacto("Elif Demir", "+90 312 822 70 94", "edemir@splatnot.com")
-        ),
         // Dubai
         Contacto("Dubai", "Emiratos Árabes Unidos", "Emergencias", "999"),
         Contacto("Dubai", "Emiratos Árabes Unidos", "Policía", "999"),
@@ -140,7 +130,18 @@ class TelefonosViewModel : ViewModel() {
         Contacto("Dubai", "Emiratos Árabes Unidos", "Servicio de Taxi", "+971 4 208 0808"),
         Contacto("Dubai", "Emiratos Árabes Unidos", "Oficina", "+971 4 495 7000",
             PersonaDeContacto("Khalid Al Maktoum", "+971 4 495 7556", "kalmaktoum@splatnot.com")
-        )
+        ),
+        // Alemania
+        Contacto("Berlin", "Alemania", "Emergencias", "112"),
+        Contacto("Berlin", "Alemania", "Policía", "110"),
+        Contacto("Berlin", "Alemania", "Bomberos", "112"),
+        Contacto("Berlin", "Alemania", "Oficina de Información y Turismo", "+49 30 2500230"),
+        Contacto("Berlin", "Alemania", "Ayuntamiento", "+49 30 902220"),
+        Contacto("Berlin", "Alemania", "Servicio de Taxi", "+49 30 202020"),
+        Contacto("Berlin", "Alemania", "Oficina", "+49 30 2655270",
+            PersonaDeContacto("Maximilian Müller", "+49 30 2655236", "mmuller@splatnot.com")
+
+    )
     )
 
     var ciudadSeleccionada by mutableStateOf(ciudades.first())

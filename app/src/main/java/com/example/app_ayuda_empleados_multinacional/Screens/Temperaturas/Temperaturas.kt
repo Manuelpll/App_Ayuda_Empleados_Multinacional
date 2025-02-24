@@ -2,7 +2,6 @@ package com.example.app_ayuda_empleados_multinacional.Screens.Temperaturas
 
 import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,27 +16,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_ayuda_empleados_multinacional.R
 import com.example.compose.onPrimaryContainerDark
-import com.example.compose.onPrimaryContainerLight
-import com.example.compose.primaryDark
-import com.example.compose.primaryLight
-import com.example.compose.secondaryDark
-import com.example.compose.tertiaryDark
 import com.example.ui.theme.bodyBoldSpex
 import com.example.ui.theme.bodyMonse
-import com.example.ui.theme.bodyMonseBold
-import com.example.ui.theme.bodySpex
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Temperaturas(
     navigateToHoras: () -> Unit,
     navigateToTelefonos: () -> Unit,
-    viewModel: TemperaturasViewModel = viewModel()
+    viewModel: TemperaturasViewModel = viewModel(),
+    navegateToEncuesta: () -> Unit
 ) {
     //Inicializo variables
     val temperature by viewModel.temperature.collectAsState()
@@ -62,7 +54,7 @@ fun Temperaturas(
                             modifier = Modifier.padding(0.dp).size(35.dp)
                         )
                     }
-                    IconButton(onClick = { Log.d("Prueba","Se ha pulsado el boton")}) {
+                    IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Rounded.AccountCircle,
                             contentDescription = "Login",
@@ -88,25 +80,34 @@ fun Temperaturas(
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(onClick = {navigateToHoras() },modifier = Modifier.weight(1f)) {
+                    IconButton(onClick = { navegateToEncuesta() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
-                            Text("Horas", style = MaterialTheme.typography.labelMedium,
-                                maxLines = 2)
+                            Icon( painterResource(R.drawable.icono_datos), contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
+                            Text("Encuesta", style = MaterialTheme.typography.labelMedium
+                            )
                         }
                     }
                     IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
-                            Text("Teléfonos", style = MaterialTheme.typography.labelMedium)
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
+                            Text("Teléfonos", style = MaterialTheme.typography.labelMedium
+                            )
                         }
                     }
-                    IconButton(onClick = {  },modifier = Modifier.weight(1f)) {
+                    IconButton(onClick = { },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Thermostat, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
-                            Text("Temperaturas", style = MaterialTheme.typography.labelMedium)
+                            Icon(Icons.Default.Thermostat, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
+                            Text("Temperaturas", style = MaterialTheme.typography.labelMedium,
+                                maxLines = 2)
                         }
                     }
+                    IconButton(onClick = { navigateToHoras() },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Schedule, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
+                            Text("Horas", style = MaterialTheme.typography.labelMedium)
+                        }
+                    }
+
                 }
             }
         }

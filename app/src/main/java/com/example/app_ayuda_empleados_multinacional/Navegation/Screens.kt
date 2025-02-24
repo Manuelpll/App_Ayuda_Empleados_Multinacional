@@ -10,3 +10,6 @@ object Horas
 
 @Serializable
 object Telefonos
+
+@Serializable
+object Encuesta

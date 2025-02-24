@@ -2,8 +2,6 @@ package com.example.app_ayuda_empleados_multinacional.Screens.Telefonos
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,25 +17,21 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.QuestionMark
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -51,17 +45,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.app_ayuda_empleados_multinacional.R
 import com.example.compose.onPrimaryContainerDark
-import com.example.compose.onPrimaryContainerLight
-import com.example.compose.primaryDark
-import com.example.compose.primaryLight
-import com.example.compose.tertiaryDark
 import com.example.ui.theme.bodyBoldSpex
 import com.example.ui.theme.bodyMonse
 import com.example.ui.theme.bodyMonseBold
@@ -69,7 +58,12 @@ import com.example.ui.theme.bodyMonseBold
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,viewModel: TelefonosViewModel = viewModel()) {
+fun Telefonos(
+    navigateToHoras: () -> Unit,
+    navigateToTemperaturas: () -> Unit,
+    viewModel: TelefonosViewModel = viewModel(),
+    navegateToEncuesta: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -115,26 +109,34 @@ fun Telefonos(navigateToHoras: () -> Unit, navigateToTemperaturas: () -> Unit,vi
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(onClick = { navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
+                    IconButton(onClick = { navegateToEncuesta()  },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(imageVector = Icons.Default.Thermostat, contentDescription = "Conversor temperaturas", modifier = Modifier.size(25.dp))
+                            Icon( painterResource(R.drawable.icono_datos), contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
+                            Text("Encuesta", style = MaterialTheme.typography.labelMedium
+                            )
+                        }
+                    }
+                    IconButton(onClick = { },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
+                            Text("Teléfonos", style = MaterialTheme.typography.labelMedium
+                            )
+                        }
+                    }
+                    IconButton(onClick = {navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Thermostat, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
                             Text("Temperaturas", style = MaterialTheme.typography.labelMedium,
                                 maxLines = 2)
                         }
                     }
                     IconButton(onClick = {  },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
-                            Text("Telefonos", style = MaterialTheme.typography.labelMedium)
+                            Icon(Icons.Default.Schedule, contentDescription = "Teléfonos de ayuda", modifier = Modifier.size(25.dp))
+                            Text("Horas", style = MaterialTheme.typography.labelMedium)
                         }
                     }
-                    IconButton(onClick = {navigateToHoras() },modifier = Modifier.weight(1f)) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Schedule, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
-                            Text("Horas", style = MaterialTheme.typography.labelMedium,
-                                maxLines = 2)
-                        }
-                    }
+
                 }
             }
         }
@@ -265,7 +267,7 @@ fun obtenerMapa(ciudad: String): Int {
         "Casablanca" -> R.drawable.casablanca
         "Osaka" -> R.drawable.osaka
         "Melbourne" -> R.drawable.melbourne
-        "Ankara" -> R.drawable.ankara
+        "Berlin" -> R.drawable.mapaalemania
         "Dubai" -> R.drawable.dubai
         else ->R.drawable.splatnot
     }

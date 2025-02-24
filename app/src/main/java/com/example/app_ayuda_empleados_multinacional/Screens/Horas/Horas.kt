@@ -47,7 +47,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.app_ayuda_empleados_multinacional.R
 import com.example.compose.onPrimaryContainerDark
-import com.example.compose.tertiaryDark
 import com.example.ui.theme.bodyBoldSpex
 import com.example.ui.theme.bodyMonse
 import com.example.ui.theme.bodyMonseBold
@@ -58,7 +57,8 @@ import com.example.ui.theme.bodyMonseBold
 fun Horas(
     navigateToTemperaturas: () -> Unit,
     navigateToTelefonos: () -> Unit,
-    viewModel: HorasViewModel = viewModel()
+    viewModel: HorasViewModel = viewModel(),
+    navegateToEncuesta: () -> Unit
 ) {
     //Inicializo las variables
     val paisList by viewModel.paises.collectAsState()
@@ -111,6 +111,20 @@ fun Horas(
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    IconButton(onClick = { navegateToEncuesta() },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon( painterResource(R.drawable.icono_datos), contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
+                            Text("Encuesta", style = MaterialTheme.typography.labelMedium
+                            )
+                        }
+                    }
+                    IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
+                            Text("Teléfonos", style = MaterialTheme.typography.labelMedium
+                            )
+                        }
+                    }
                     IconButton(onClick = {navigateToTemperaturas() },modifier = Modifier.weight(1f)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(Icons.Default.Thermostat, contentDescription = "Horas en distintas ciudades", modifier = Modifier.size(25.dp))
@@ -124,13 +138,7 @@ fun Horas(
                             Text("Horas", style = MaterialTheme.typography.labelMedium)
                         }
                     }
-                    IconButton(onClick = { navigateToTelefonos() },modifier = Modifier.weight(1f)) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.Phone, contentDescription = "Teléfonos de ayuda ", modifier = Modifier.size(25.dp))
-                            Text("Teléfonos", style = MaterialTheme.typography.labelMedium
-                            )
-                        }
-                    }
+
                 }
             }
         }
